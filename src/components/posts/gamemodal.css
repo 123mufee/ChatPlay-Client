@@ -1,0 +1,62 @@
+/* .image-div-1 {
+    background-color: red;
+  }
+  
+  .image-div-2 {
+    background-color: blue;
+  }
+  
+  .image-div-3 {
+    background-color: green;
+  }
+  
+  .image-div-4 {
+    background-color: yellow;
+  }
+  
+  .image-div-5 {
+    background-color: orange;
+  }
+  .image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    border: 1px solid black;
+  }
+  
+  .image-container img {
+    height: auto;
+    object-fit: cover;
+  }
+  
+  .image-div-1,
+  .image-div-2 {
+    width: 50%;
+  }
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .modal {
+    position: relative; 
+    background-color: white;
+    padding: 20px;
+    max-width: 600px;
+    max-height: 80%;
+    overflow: auto;
+  }
+  
+  
+  
+  
+  
+   */
