@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './gameModal.css';
+import './gamemodal.css';
 
 function GameModal(props) {
   const [isOpen, setIsOpen] = useState(false);
