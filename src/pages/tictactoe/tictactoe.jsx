@@ -5,7 +5,7 @@ import JoinRoomModal from "../../components/tictactoe/JoinRoomModal/JoinRoomModa
 import { useEffect, useState } from "react";
 import io from "socket.io-client";
 
-const socket = io.connect("http://localhost:9899");
+const socket = io.connect("https://chatplay-server4.onrender.com");
 
 const TicTacToe = () => {
   const [showModal, setShowModal] = useState(false);

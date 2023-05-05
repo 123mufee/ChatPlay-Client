@@ -55,70 +55,70 @@ export default function App() {
     return () => clearTimeout(timer);
   }, []);
 
-  useEffect(() => {
-    const userCheck = () => {
-      if (user) {
-        const userYes = () => {
-          const userMailCheck = user.emails[0];
-          setOauthMail(userMailCheck.value);
-          setOauthMails(oauthMail);
-          setUserName(user.displayName);
-          setLogin(true);
-          localStorage.setItem("newOauth?", false);
-          localStorage.setItem("loginMethod", "oauth");
-          localStorage.setItem("isLogged", true)
+  // useEffect(() => {
+  //   const userCheck = () => {
+  //     if (user) {
+  //       const userYes = () => {
+  //         const userMailCheck = user.emails[0];
+  //         setOauthMail(userMailCheck.value);
+  //         setOauthMails(oauthMail);
+  //         setUserName(user.displayName);
+  //         setLogin(true);
+  //         localStorage.setItem("newOauth?", false);
+  //         localStorage.setItem("loginMethod", "oauth");
+  //         localStorage.setItem("isLogged", true)
 
-          axios.post(`${userUrl}checkOauth`, { userData }).then((response) => {
-            try {
-              if (response.data.success) {
-                setOauthUserForm(true);
-                Navigater("/register");
-              } else {
-                setOauthUserForm(false);
-              }
-            } catch (error) {
-              console.error(error);
-            }
-          });
-        };
-        userYes();
-      } else {
-        const userNo = () => {
-          setUserName(null);
-          setLogin(false);
-        };
-        userNo();
-      }
-    };
-    userCheck();
-  }, [user]);
+  //         axios.post(`${userUrl}checkOauth`, { userData }).then((response) => {
+  //           try {
+  //             if (response.data.success) {
+  //               setOauthUserForm(true);
+  //               Navigater("/register");
+  //             } else {
+  //               setOauthUserForm(false);
+  //             }
+  //           } catch (error) {
+  //             console.error(error);
+  //           }
+  //         });
+  //       };
+  //       userYes();
+  //     } else {
+  //       const userNo = () => {
+  //         setUserName(null);
+  //         setLogin(false);
+  //       };
+  //       userNo();
+  //     }
+  //   };
+  //   userCheck();
+  // }, [user]);
 
-  useEffect(() => {
-    const getUser = () => {
-      fetch(import.meta.env.VITE_PASSPORTSUCCESS_URL, {
-        method: "GET",
-        credentials: "include",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Credentials": true,
-        },
-      })
-        .then((response) => {
-          if (response.status === 200) {
-            return response.json();
-          }
-          throw new Error("authentication has been failed!");
-        })
-        .then((resObject) => {
-          setUser(resObject.user);
-        })
-        .catch((err) => {
-          console.error(err);
-        });
-    };
-    getUser();
-  }, [user]);
+  // useEffect(() => {
+  //   const getUser = () => {
+  //     fetch(import.meta.env.VITE_PASSPORTSUCCESS_URL, {
+  //       method: "GET",
+  //       credentials: "include",
+  //       headers: {
+  //         Accept: "application/json",
+  //         "Content-Type": "application/json",
+  //         "Access-Control-Allow-Credentials": true,
+  //       },
+  //     })
+  //       .then((response) => {
+  //         if (response.status === 200) {
+  //           return response.json();
+  //         }
+  //         throw new Error("authentication has been failed!");
+  //       })
+  //       .then((resObject) => {
+  //         setUser(resObject.user);
+  //       })
+  //       .catch((err) => {
+  //         console.error(err);
+  //       });
+  //   };
+  //   getUser();
+  // }, [user]);
 
   useMemo(()=>{
     const checkLogin = () => {
