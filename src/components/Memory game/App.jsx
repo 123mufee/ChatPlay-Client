@@ -106,7 +106,8 @@ function App() {
 
   const didGameComplete = () => {
     if (complete === cards.length / 2 && complete !== 0) {
-      toast.success("You Won");
+      // toast.success("You Won");
+      setGameModal(true)
       setWon(true);
       setWinRate(prevWinRate => {
         const updatedWinRate = prevWinRate + 1;
@@ -163,7 +164,7 @@ function App() {
   const resetTurn = () => {
     setChoiceOne(null);
     setChoiceTwo(null);
-    if (turns <= 2) {
+    if (turns <= 10) {
       setTurns(prevTurns => prevTurns + 1)
     } else {
       toast.error("You Failed", {
@@ -177,7 +178,7 @@ function App() {
         axios.get(`${userUrl}memoryLoss/${updatedLossRate}/${data.token}`);
         return updatedLossRate;
       });
-      setGameModal(true);
+      // setGameModal(true);
       return;
     }
     setDisabled(false);

@@ -17,7 +17,7 @@ export default function Modal() {
                         <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t"></div>
                         <div className="relative p-0 flex-auto">
                             <div className="max-w-4xl flex items-center h-auto  flex-wrap mx-auto lg:my-0">
-                                <div className="h-96 w-96 lg:w-screen" style={{ backgroundImage: "url('https://www.shutterstock.com/image-vector/you-win-blue-banner-lights-260nw-1703662585.jpg')", backgroundSize: "cover", backgroundRepeat: 'no-repeat' }}>
+                                <div className="h-96 w-96 lg:w-screen" style={{ backgroundImage: "url('https://www.google.com/url?sa=i&url=https%3A%2F%2Fstock.adobe.com%2Fch_it%2Fsearch%3Fk%3D%2522you%2520win%2522&psig=AOvVaw3a_wr5cwagugVoN5BVIuaa&ust=1683606525703000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCPCR7Znx5P4CFQAAAAAdAAAAABAE')", backgroundSize: "cover", backgroundRepeat: 'no-repeat' }}>
 
 
                                 </div>

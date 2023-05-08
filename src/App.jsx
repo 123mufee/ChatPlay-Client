@@ -120,60 +120,60 @@ export default function App() {
   //   getUser();
   // }, [user]);
 
-  useMemo(()=>{
+  useMemo(() => {
     const checkLogin = () => {
-      if(localStorage.getItem('isLogged')) {
+      if (localStorage.getItem('isLogged')) {
         setIsLogged(true)
       }
     }
     checkLogin()
-  },[])
+  }, [])
 
   return (
     <>
-     <div className="relative min-h-screen -z-5">
-   <video
-  autoPlay
-  muted
-  loop
-  className="absolute top-0 left-0 w-full h-full object-cover z-0 blur-lg	"
->
-  <source src="https://res.cloudinary.com/dxdwykgvy/video/upload/v1683212595/pexels-pressmaster-3141208-3840x2160-25fps_uiyed2.mp4" type="video/mp4" />
-</video>
+      <div className="relative min-h-screen -z-5">
+        <video
+          autoPlay
+          muted
+          loop
+          className="absolute top-0 left-0 w-full h-full object-cover z-0 blur-lg	"
+        >
+          <source src="https://res.cloudinary.com/dxdwykgvy/video/upload/v1683212595/pexels-pressmaster-3141208-3840x2160-25fps_uiyed2.mp4" type="video/mp4" />
+        </video>
 
-      <Router>
-        <Routes>
-          {/* Session Handling */}
-          <Route
-            path="/Login"
-            element={isLogged ? <Navigate to="/" /> : <LoginPage />}
-          />
-          <Route
-            exact
-            path="/signup"
-            element={isLogged ? <Navigate to="/" /> : <SignupPage />}
-          />
-          {/* <Route path="/" element={user ? <LoginPage /> : <HomePage />} /> */}
+        <Router>
+          <Routes>
+            {/* Session Handling */}
+            <Route
+              path="/Login"
+              element={isLogged ? <Navigate to="/" /> : <LoginPage />}
+            />
+            <Route
+              exact
+              path="/signup"
+              element={isLogged ? <Navigate to="/" /> : <SignupPage />}
+            />
+            {/* <Route path="/" element={user ? <LoginPage /> : <HomePage />} /> */}
 
-          {/* Routes */}
-          <Route exact path="/" element={isLogged ? <HomePage /> : <Navigate to="/login" />} />
-          {/* <Route exact path="/home" element={<HomePage />} /> */}
-          <Route exact path="/profile" element={isLogged ? <ProfilePage /> : <Navigate to="/login" />} />
-          <Route exact path="/form" element={isLogged ? <Form /> : <Navigate to="/login" />} />
-          {/* <Route exact path="/editProfile" element={<EditProfile />} /> */}
-          <Route
-            exact
-            path="/register"
-            element={isOauthNew ? <RegisterPage /> : <Navigate to="/" />}
-          />
-          <Route exact path = '/chat' element={<ChatPage/>}/>
-          <Route exact path = '/test' element={<Test/>}/>
-          <Route exact path = '/tic' element={<TicTacToe/>}/>
-          <Route exact path = '/memory' element={<Memory/>}/>
-          <Route exact path = '/modal' element={<GameModal/>}/>
-          <Route path="/otherprofile/:propValue" element={isLogged ? <OtherProfile /> : <Navigate to="/login" />} />
-        </Routes>
-      </Router>
+            {/* Routes */}
+            <Route exact path="/" element={isLogged ? <HomePage /> : <Navigate to="/login" />} />
+            {/* <Route exact path="/home" element={<HomePage />} /> */}
+            <Route exact path="/profile" element={isLogged ? <ProfilePage /> : <Navigate to="/login" />} />
+            {/* <Route exact path="/form" element={isLogged ? <Form /> : <Navigate to="/login" />} /> */}
+            {/* <Route exact path="/editProfile" element={<EditProfile />} /> */}
+            <Route
+              exact
+              path="/register"
+              element={isOauthNew ? <RegisterPage /> : <Navigate to="/" />}
+            />
+            <Route exact path='/chat' element={<ChatPage />} />
+            <Route exact path='/test' element={<Test />} />
+            {/* <Route exact path = '/tic' element={<TicTacToe/>}/> */}
+            <Route exact path='/memory' element={isLogged ? <Memory /> : <Navigate to="/login" />} />
+            {/* <Route exact path = '/modal' element={<GameModal/>}/> */}
+            <Route path="/otherprofile/:propValue" element={isLogged ? <OtherProfile /> : <Navigate to="/login" />} />
+          </Routes>
+        </Router>
       </div>
     </>
   );
