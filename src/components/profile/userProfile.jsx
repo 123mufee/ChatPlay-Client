@@ -354,12 +354,12 @@ export default function UserProfile() {
                 {
                   loading === false && (
                     <div className="flex justify-center">
-                      <p>Memory Match</p>
-                      <span class="text-xl font-bold block uppercase mt-3 tracking-wide text-blueGray-600">
+                      <span className="text-xl font-bold block uppercase mt-3 tracking-wide text-blueGray-600">Memory Match: </span>
+                      <span class="text-xl font-bold block uppercase ml-5 mt-3 tracking-wide text-blueGray-400">
                         {winRate}
                       </span>
                       <span class="text-sm mt-4 text-blueGray-400">Win</span>
-                      <span class="text-xl font-bold block uppercase ml-5 mt-3 tracking-wide text-blueGray-600">
+                      <span class="text-xl font-bold block uppercase ml-5 mt-3 tracking-wide text-blueGray-400">
                         {loseRate}
                       </span>
                       <span class="text-sm mt-4 text-blueGray-400">Lose</span>
@@ -369,13 +369,12 @@ export default function UserProfile() {
                      {
                   loading === false && (
                     <div className="flex justify-center"> 
-                    <p>Tictactoe</p>
-
-                      <span class="text-xl font-bold block uppercase mt-3 tracking-wide text-blueGray-600">
+                    <span className="text-xl font-bold block uppercase mt-3 tracking-wide text-blueGray-600">Tictactoe:</span>
+                      <span class="text-xl font-bold block uppercase mt-3 ml-5 tracking-wide text-blueGray-400">
                        {ticwinRate}
                       </span>
                       <span class="text-sm mt-4 text-blueGray-400">Win</span>
-                      <span class="text-xl font-bold block uppercase ml-5 mt-3 tracking-wide text-blueGray-600">
+                      <span class="text-xl font-bold block uppercase ml-5 mt-3 tracking-wide text-blueGray-400">
                         {ticloseRate}
                       </span>
                       <span class="text-sm mt-4 text-blueGray-400">Lose</span>
