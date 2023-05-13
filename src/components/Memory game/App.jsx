@@ -5,8 +5,11 @@ import { toast, Toaster } from "react-hot-toast"
 import memoryMatchStore from '../../store/memoryMatch';
 import modalStore from '../../store/modalStore';
 import Modal from './modal'
+import LossModal from "./lossModal"
+
 import axios from 'axios';
 import { userUrl } from '../../api/api';
+// import Modal from '../posts/modal';
 // array of card images
 const cardImages = [
   { "src": "https://raw.githubusercontent.com/iamshaunjp/React-Firebase/lesson-58/magic-memory/public/img/helmet-1.png", matched: false },
@@ -33,6 +36,7 @@ function App() {
   // let winRate = 0
 
   const { gameModal, setGameModal } = modalStore()
+  const{lossModal,setLossModal}=modalStore()
 
 
   // useEffect(() => {
@@ -164,15 +168,16 @@ function App() {
   const resetTurn = () => {
     setChoiceOne(null);
     setChoiceTwo(null);
-    if (turns <= 10) {
+    if (turns <= 9) {
       setTurns(prevTurns => prevTurns + 1)
     } else {
-      toast.error("You Failed", {
-        onClose: () => {
-          setDisabled(true);
-          setDisabled(false);
-        }
-      });
+      // toast.error("You Failed", {
+      //   onClose: () => {
+      //     setDisabled(true);
+      //     setDisabled(false);
+      //   }
+      // });
+      setLossModal(true)
       setLossRate(prevLossRate => {
         const updatedLossRate = prevLossRate + 1;
         axios.get(`${userUrl}memoryLoss/${updatedLossRate}/${data.token}`);
@@ -188,6 +193,7 @@ function App() {
 
   return (
     <>
+
       <Toaster
         toastOptions={{
           className: '',
@@ -205,10 +211,10 @@ function App() {
         {/* <h1>Magic Match</h1>
       <h5>A card memory game</h5> */}
         {/* <button style={{color:'white'}} onClick={shuffleCards}>New Game</button> */}
-        <button class="bg-transparent hover:bg-white text-white font-semibold hover:text-purple-700 py-2 px-4 border border-white hover:border-transparent rounded" onClick={shuffleCards}>
+        <button class="bg-transparent hover:bg-white text-black  font-semibold hover:text-purple-700 py-2 px-4 border border-black hover:border-transparent rounded" onClick={shuffleCards}>
           New Game
         </button>
-        <p>Turns: {turns}</p>
+        <p className='text-black '>Turns: {turns}</p>
         <div className="A1 card-grid">
           {cards.map((card) => (
             <SingleCard
@@ -223,6 +229,11 @@ function App() {
         {
           gameModal === true && (
             <Modal />
+          )
+        }
+         {
+          lossModal === true && (
+            <LossModal/>
           )
         }
         {/* <Modal isOpen={isModalOpen} className="modal">

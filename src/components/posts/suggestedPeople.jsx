@@ -101,12 +101,12 @@ export default function connection() {
                     </div>
                   </div> */}
                    <div
-                    className="flex flex-col justify-center max-w-xs p-6 shadow-md rounded-lg hover:shadow-xl transition-shadow duration-300 ease-in-out sm:px-12 bg-transparent text-White"
+                    className="flex flex-col justify-center max-w-xs p-6 rounded-lg ease-in-out sm:px-12 bg-transparent text-White"
                     key={x._id}
                     style={{width:'400px'}}
                   >
                   <div
-                    class="rounded-2xl bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 p-1 shadow-xl  opacity-90">
+                    class="rounded-2xl bg-gradient-to-r from-pink-500 hover:shadow-xl transition-shadow duration-300 via-red-500 to-yellow-500 p-1 opacity-90">
                     <a class="block rounded-xl bg-blue-400 p-4 sm:p-6 lg:p-8">
                       <div class="mt-16">
                       <img

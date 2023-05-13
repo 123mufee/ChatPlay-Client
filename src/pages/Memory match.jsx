@@ -35,35 +35,41 @@ export default function Memory() {
 
   return (
     <>
-      <div className="difficulty flex relative z-30 justify-center" style={{ display: "flex" ,justifyContent:"center"}}>
-        <Sidebar />
-        {/* <ChatPage /> */}
-        <div>
-          <div  style={{ display: "flex" ,justifyContent:"center"}}>  
+      <div className="relative z-10 bg-purple-200 opacity-80" style={{ height: '100vh' }}>
 
-            <button class="bg-transparent hover:bg-white text-white font-semibold hover:text-purple-700 py-2 px-4 border border-white hover:border-transparent rounded" onClick={Easy}>
-              Easy
-            </button>
-            <button class="bg-transparent hover:bg-white text-white font-semibold hover:text-purple-700 py-2 px-4 border border-white hover:border-transparent rounded" onClick={Medium}>
-              Medium
-            </button>
-            <button class="bg-transparent hover:bg-white text-white font-semibold hover:text-purple-700 py-2 px-4 border border-white hover:border-transparent rounded" onClick={Hard}>
-              Hard
-            </button>
+        <div className="difficulty flex relative z-30 justify-center" style={{ display: "flex", justifyContent: "center" }}>
+          <Sidebar />
+          {/* <ChatPage /> */}
+          <div>
+            <div style={{ display: "flex", justifyContent: "center" }}>
+
+              <button class="bg-transparent hover:bg-purple-700 text-black font-semibold hover:text-white py-2 px-4 border border-black hover:border-transparent rounded" onClick={Easy}>
+                Easy
+              </button>
+              <button class="bg-transparent hover:bg-purple-700 text-black font-semibold hover:text-white py-2 px-4 border border-black hover:border-transparent rounded" onClick={Medium}>
+                Medium
+              </button>
+              <button class="bg-transparent hover:bg-purple-700 text-black font-semibold hover:text-white py-2 px-4 border border-black hover:border-transparent rounded" onClick={Hard}>
+                Hard
+              </button>
+            </div>
+            {(() => {
+              switch (difficulty) {
+                case "Easy":
+                  return <App />;
+                case "Medium":
+                  return <Level2 />;
+                case "Hard":
+                  return <Level3 />;
+                default:
+                  return null;
+              }
+            })()}
           </div>
-          {(() => {
-            switch (difficulty) {
-              case "Easy":
-                return <App />;
-              case "Medium":
-                return <Level2 />;
-              case "Hard":
-                return <Level3 />;
-              default:
-                return  null;
-            }
-          })()}
         </div>
+        {/* <div style={{wi}}>
+
+      </div> */}
       </div>
     </>
   );

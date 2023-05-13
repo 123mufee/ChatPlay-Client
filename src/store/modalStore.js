@@ -49,6 +49,8 @@ const modalStore = create((set) => ({
 
   gameModal: false,
   setGameModal: (newModal) => set({ gameModal: newModal }),
+  lossModal:false,
+  setLossModal:(newLossModal)=>set({lossModal:newLossModal}),
 }));
 
 export default modalStore;

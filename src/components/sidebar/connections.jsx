@@ -89,8 +89,9 @@ export default function Connections({ requests }) {
             Connection requests
           </h3>
         </div>
+        
         <ul>
-          <hr className="mt-10 border-b-1 border-white" />
+          <hr className="mt-10 border-b-1 border-transparent" />
           {requests.length === 0 ? (
             <div>Hurray, you have dealt with all your connection requests</div>
           ) : (
@@ -99,7 +100,7 @@ export default function Connections({ requests }) {
                 <>
                   <div
                     key={result._id}
-                    className="mt-4 bg-purple-600 flex items-center justify-between p-2"
+                    className="mt-4 bg-transparent flex items-center justify-between p-2"
                   >
                     <h3
                       className={`text-2xl font-semibold text-white cursor-pointer duration-300 ease-in-out ${
@@ -116,13 +117,15 @@ export default function Connections({ requests }) {
                         className="px-4 py-2 mr-2 bg-green-600 text-white rounded hover:bg-green-700"
                         onClick={() => acceptRequest(result._id)}
                       >
-                        <FontAwesomeIcon icon={faCheck} />
+                        {/* <FontAwesomeIcon icon={faCheck} /> */}
+                        Accept
                       </button>
                       <button
                         className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
                         onClick={() => declineRequest(result._id)}
                       >
-                        <FontAwesomeIcon icon={faTimes} />
+                        {/* <FontAwesomeIcon icon={faTimes} /> */}
+                        Decline
                       </button>
                     </div>
                   </div>

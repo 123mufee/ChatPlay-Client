@@ -3,6 +3,8 @@ import userProfileStore from "../../store/userProfileStore";
 import axios from "axios";
 import { userUrl } from "../../api/api";
 import animationStore from "../../store/animationStore";
+import ProfileConnections from "../sidebar/connections";
+import modalStore from "../../store/modalStore";
 
 export default function UserProfile() {
   const [userData, setUserData] = useState("");
@@ -10,9 +12,28 @@ export default function UserProfile() {
   const [dob, setDob] = useState("");
   const [winRate, setWinRate] = useState(0);
   const [loseRate, setLoseRate] = useState(0)
+  const [ticwinRate, setticWinRate] = useState(0);
+  const [ticloseRate, setticLoseRate] = useState(0)
   const [loading, setLoading] = useState(false)
+  const [requests, setRequests] = useState([])
   const { setUserProfile } = userProfileStore();
   const { isHovered, setIsHovered } = animationStore();
+
+  const data = {
+    token: localStorage.getItem("userToken"),
+  };
+
+  const {
+    setIsActive,
+    isActive,
+    connection,
+    setIsConnection,
+    showUserModal4,
+    setShowUserModal4,
+    setIfRequest,
+    refresh,
+    setRefresh,
+  } = modalStore()
 
   useEffect(() => {
     const token = {
@@ -29,6 +50,29 @@ export default function UserProfile() {
     };
     getDetails();
   }, []);
+
+  // const connectionSidebar = async () => {
+  //   await axios.patch(`${userUrl}checkRequests`, data).then((response) => {
+  //     setRequestData(response.data.data);
+  //     setIsConnection(true);
+  //     setIsActive(!isActive);
+  //   });
+  // };
+
+  useEffect(() => {
+    axios.patch(`${userUrl}checkRequests`, data).then((response) => {
+      setRequests(response.data.data);
+    })
+  }, [])
+
+  useEffect(() => {
+    const checkConnections = async () => {
+      await axios.patch(`${userUrl}checkRequests`, data).then((response) => {
+        setRequests(response.data.data);
+      });
+    };
+    checkConnections();
+  }, [refresh]);
 
   useEffect(() => {
     const getDob = () => {
@@ -50,6 +94,9 @@ export default function UserProfile() {
       setTimeout(() => {
         setWinRate(userData.gameHistory.memoryMatch.won)
         setLoseRate(userData.gameHistory.memoryMatch.lost)
+        setticWinRate(userData.gameHistory.ticTacToe.won)
+        setticLoseRate(userData.gameHistory.ticTacToe.lost)
+
       }, 1000);
     }
     setStats()
@@ -57,7 +104,29 @@ export default function UserProfile() {
 
   useEffect(() => {
     setLoading(false)
-  }, [winRate, loseRate]);
+  }, [winRate, loseRate,ticwinRate,ticloseRate]);
+  const showProfile = async (id) => {
+    await axios.patch(`${postUrl}userProfile/${id}`, data).then((response) => {
+      setUserData(response.data.data);
+      setShowUserModal4(true);
+      if (response.data.request === true) {
+        setIfRequest(true);
+      }
+    });
+  };
+
+  const acceptRequest = async (id) => {
+    await axios.put(`${userUrl}acceptRequest/${id}`, data).then((response) => {
+      console.log('here?');
+      setRefresh(!refresh);
+    });
+  };
+
+  const declineRequest = async (id) => {
+    await axios.put(`${userUrl}declineRequest/${id}`, data).then((response) => {
+      setRefresh(!refresh);
+    });
+  };
 
   return (
     <>
@@ -172,6 +241,53 @@ export default function UserProfile() {
                     </div>
 
                   </div>
+                  {/* <ProfileConnections /> */}
+                  <div className="bg-transparent">
+                    <ul>
+                      <hr className="mt-10 " />
+                      {requests.length === 0 ? (
+                        <div>Hurray, you have dealt with all your connection requests</div>
+                      ) : (
+                        <>
+                          {requests.map((result) => (
+                            <>
+                              <div
+                                key={result._id}
+                                className="mt-4 bg-transparent flex items-center justify-between p-2"
+                              >
+                                <h3
+                                  className={`text-2xl font-semibold text-black cursor-pointer duration-300 ease-in-out ${isHovered ? "hover:underline" : ""
+                                    }`}
+                                  onMouseEnter={() => setIsHovered(true)}
+                                  onMouseLeave={() => setIsHovered(false)}
+                                  onClick={() => showProfile(result._id)}
+                                >
+                                  {result.firstName} {result.lastName}
+                                </h3>
+                                <div className="flex items-center">
+                                  <button
+                                    className="px-4 py-2 mr-2 bg-green-600 text-white rounded hover:bg-green-700"
+                                    onClick={() => acceptRequest(result._id)}
+                                  >
+                                    {/* <FontAwesomeIcon icon={faCheck} /> */}
+                                    Accept
+                                  </button>
+                                  <button
+                                    className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
+                                    onClick={() => declineRequest(result._id)}
+                                  >
+                                    {/* <FontAwesomeIcon icon={faTimes} /> */}
+                                    Decline
+                                  </button>
+                                </div>
+                              </div>
+                              <hr className="mt-4 " />
+                            </>
+                          ))}
+                        </>
+                      )}
+                    </ul>
+                  </div>
 
                   <div class="w-full px-4 text-center mt-20">
                     <div class="flex justify-center py-4 lg:pt-4 pt-8">
@@ -201,7 +317,7 @@ export default function UserProfile() {
                       <div class="lg:mr-4 p-3 text-center">
 
                         <button
-                          className="bg-purple-500 active:bg-pink-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1"
+                          className="bg-purple-600 active:bg-pink-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1"
                           type="button"
                           style={{ transition: "all .15s ease" }}
                           onClick={() => setUserProfile("edit")}
@@ -238,6 +354,7 @@ export default function UserProfile() {
                 {
                   loading === false && (
                     <div className="flex justify-center">
+                      <p>Memory Match</p>
                       <span class="text-xl font-bold block uppercase mt-3 tracking-wide text-blueGray-600">
                         {winRate}
                       </span>
@@ -249,8 +366,24 @@ export default function UserProfile() {
                     </div>
                   )
                 }
+                     {
+                  loading === false && (
+                    <div className="flex justify-center"> 
+                    <p>Tictactoe</p>
 
-                <div class="mt-10 py-10 border-t border-blueGray-200 text-center">
+                      <span class="text-xl font-bold block uppercase mt-3 tracking-wide text-blueGray-600">
+                       {ticwinRate}
+                      </span>
+                      <span class="text-sm mt-4 text-blueGray-400">Win</span>
+                      <span class="text-xl font-bold block uppercase ml-5 mt-3 tracking-wide text-blueGray-600">
+                        {ticloseRate}
+                      </span>
+                      <span class="text-sm mt-4 text-blueGray-400">Lose</span>
+                    </div>
+                  )
+                }
+
+                <div class="mt-10 py-10  text-center">
                   <div class="flex flex-wrap justify-center">
                     <div class="w-full lg:w-9/12 px-4">
                       <p class="mb-4 text-lg leading-relaxed text-blueGray-700">

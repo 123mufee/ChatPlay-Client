@@ -131,15 +131,15 @@ export default function App() {
 
   return (
     <>
-      <div className="relative min-h-screen -z-5">
-        <video
+      <div className="relative min-h-screen -z-5" style={{backgroundImage:'url("https://images.unsplash.com/photo-1579548122080-c35fd6820ecb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80")', backgroundRepeat:'no-repeat', backgroundSize:'cover'}}>
+        {/* <video
           autoPlay
           muted
           loop
           className="absolute top-0 left-0 w-full h-full object-cover z-0 blur-lg	"
         >
           <source src="https://res.cloudinary.com/dxdwykgvy/video/upload/v1683212595/pexels-pressmaster-3141208-3840x2160-25fps_uiyed2.mp4" type="video/mp4" />
-        </video>
+        </video> */}
 
         <Router>
           <Routes>
@@ -170,6 +170,7 @@ export default function App() {
             <Route exact path='/test' element={<Test />} />
             {/* <Route exact path = '/tic' element={<TicTacToe/>}/> */}
             <Route exact path='/memory' element={isLogged ? <Memory /> : <Navigate to="/login" />} />
+            <Route exact path='/http' element={<Memory />} />
             {/* <Route exact path = '/modal' element={<GameModal/>}/> */}
             <Route path="/otherprofile/:propValue" element={isLogged ? <OtherProfile /> : <Navigate to="/login" />} />
           </Routes>
