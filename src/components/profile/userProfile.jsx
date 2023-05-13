@@ -225,9 +225,9 @@ export default function UserProfile() {
           </div>
         </div> */}
 
-        <section class="pt-16 bg-blueGray-50">
+        <section class="pt-16">
           <div class="w-full lg:w-4/12 px-4 mx-auto">
-            <div class="relative flex flex-col min-w-0 break-words bg-gray-200 w-full mb-6 shadow-xl rounded-lg mt-16 opacity-80">
+            <div class="relative flex flex-col min-w-0 break-words bg-gray-200 w-full mb-6 shadow-xl rounded-lg mt-16">
               <div class="px-6">
                 <div class="flex flex-wrap justify-center">
                   <div class="w-full px-4 flex justify-center">
